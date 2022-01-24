@@ -10,8 +10,8 @@ export function getDeltaTimeFormatted(start: Date, end: Date) {
   const sec = millisecondsToSeconds(delta - h * MS_IN_HOUR - min * MS_IN_MIN)
   const ms = delta - h * MS_IN_HOUR - min * MS_IN_MIN - sec * MS_IN_SEC;
   const res =
-    (h ? h + ' hours' : '')
-    + (min ? min + ' mins' : '')
+    (h ? h + ' hours, ' : '')
+    + (min ? min + ' mins, ' : '')
     + (sec + ms * 0.001).toFixed(3) + ' secs';
   return res.trim();
 }
@@ -21,4 +21,14 @@ export function formatDurationAsTime(duration: Duration): string {
   const m = duration.minutes;
   const s = duration.seconds;
   return `${h} h ${m} min ${s} secs`;
+}
+
+export function collectDataFromStream(stream): Promise<{code: string; expires_at: string}> {
+  const chunks = [];
+
+  return new Promise((res, rej) => {
+    stream.on('data', (chunk) => chunks.push(Buffer.from(chunk)));
+    stream.on('error', (err) => rej(err));
+    stream.on('end', () => res(JSON.parse(Buffer.concat(chunks).toString('utf8'))));
+  })
 }

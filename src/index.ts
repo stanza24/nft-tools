@@ -1,18 +1,16 @@
 import 'dotenv/config';
-import { getTokens } from './discord/getToken';
 import { checkForInviteLink } from './discord/invites';
 
 // getTokens();
 
+/**
+ * @description Write your channels in format:
+ * { name: Notify server name, serverId, channelId }
+ */
 const projects = [
-  { name: 'Gooniez', serverId: '929436441560379392', channelId: '929436443733012507' },
-  { name: 'Gaming Ape Club', serverId: '927427107666133033', channelId: '928682393399853077' },
-  { name: 'Grumpy Pandas', serverId: '910260200710221824', channelId: '910260200924119105' },
-  { name: 'Squiggles', serverId: '923670412943044631', channelId: '923670537186734091' },
+  // {name: 'My server', serverId: '935140299582365756', channelId: '935140299582365760'}
 ]
 
 projects.forEach(project => {
   checkForInviteLink(project)
 });
-
-// { name: 'Monster Ape', serverId: '929363884790390784', channelId: '929363885469876237' },

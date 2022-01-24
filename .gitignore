@@ -2,6 +2,8 @@ node_modules/
 dist/
 assets/
 .history/
+package-lock.json
+yarn.lock
 *.tmp.*
 *.key
 # Ignore .env from being accidentally committed.

@@ -1,14 +1,15 @@
 import { api as discordApi } from "./discord"
 import { TgBot } from "../telegram/notify";
 import { format, intervalToDuration } from 'date-fns'
-import { formatDurationAsTime, getDeltaTimeFormatted } from "../utils/utils";
+import { collectDataFromStream, formatDurationAsTime, getDeltaTimeFormatted } from "../utils/utils";
 import { AxiosResponse } from "axios";
+import zlib from 'zlib';
 
 const TIMEOUT = 2000;
 
 // If you don't have tg bot, just pass false here,
 // either fill the env TELEGRAM_TOKEN and set this one to true
-const USE_TG_NOTIFICATION = false;
+const USE_TG_NOTIFICATION = true;
 
 let tg;
 
@@ -24,9 +25,15 @@ export async function checkForInviteLink({ name, serverId, channelId }) {
     if (response?.status || response?.status === 200) {
       const timeEnd = new Date();
       const delta = getDeltaTimeFormatted(timeStart, timeEnd)
-      if (USE_TG_NOTIFICATION) notify(name, delta);
+
+      const {code, expires_at} = await collectDataFromStream(response.data);
+      const invite = `https://discord.gg/${code}`, expires = format(new Date(expires_at), 'dd.MM.yy HH:mm:ss');
+
+      if (USE_TG_NOTIFICATION) notify(name, invite, expires, delta);
       const time = format(timeEnd, 'dd.MM HH:mm:ss')
       console.log(`\<${time}> Project ${name}: ✅ Done!`);
+      console.log(`Invite: ${invite}`);
+      console.log(`Expires: ${expires}`);
     }
   } catch (error) {
     const currTime = new Date();
@@ -76,14 +83,23 @@ function errorHandler(response, name, timer): number {
   return timeout
 }
 
-function notify(name, time) {
+function notify(name, invite, expires, time) {
   try {
     if (USE_TG_NOTIFICATION)
       tg.sendMsgToMe(
-        `🔑 *InvitePicker*\n\n✅ *Project ${name}*\n⏲️ ${time}\n_Invite is ready\!_`
+        `
+🔑 *InvitePicker*
+        
+✅ *${name}*
+🔗 ${invite}
+⚠️ Expires *${expires}*
+
+⏲️ Caught in _${time}_`
       );
   } catch (error) {
     console.error(`Can't send tg message!`);
     return;
   }
 }
+
+
