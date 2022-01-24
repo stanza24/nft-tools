@@ -8,8 +8,9 @@
 6. Go to https://api.telegram.org/bot(token)/getUpdates where (token) is your TELEGRAM_TOKEN (remove the brackets);
 7. message.from.id is your TELEGRAM_CHAT_ID;
 8. Fill your projects in `index.ts` 
-9. ```js
-  yarn run
+9. 
+```js
+yarn run
 ```
 
 `src/discord/invites.ts`
