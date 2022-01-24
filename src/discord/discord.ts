@@ -4,6 +4,7 @@ import zlib from 'zlib';
 const API_URL = "https://discord.com"
 
 const token = process.env.DISCORD_TOKEN;
+const userAgent = process.env.USER_AGENT;
 const contextProperties = process.env.CONTEXT_PROPERTIES;
 const superProperties = process.env.SUPER_PROPERTIES;
 
@@ -19,7 +20,7 @@ export const api = axios.create({
     'sec-fetch-dest': 'empty',
     'sec-fetch-mode': 'cors',
     'sec-fetch-site': 'same-origin',
-    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36',
+    'user-agent': userAgent,
     'x-context-properties': contextProperties,
     'x-debug-options': 'bugReporterEnabled',
     'x-discord-locale': 'ru',
