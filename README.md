@@ -7,5 +7,5 @@ checkForInviteLink({
   channelId: 'discord channel id',
 })
 
-`src/discord/`discord/`.ts`
+`src/discord/getToken.ts`
 getTokens()
