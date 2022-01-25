@@ -1,5 +1,5 @@
 import { checkForInviteLink } from './modules/invitePicker/';
-import config2 from './config.json'
+import config2 from '../config.json'
 import config from 'dotenv/config';
 
 export function startApp() {

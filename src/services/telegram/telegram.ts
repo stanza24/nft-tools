@@ -1,6 +1,6 @@
 import TelegramApi from 'node-telegram-bot-api';
 import dotenv from 'dotenv/config';
-import config from '../../config.json';
+import config from '../../../config.json';
 
 const token = process.env.TELEGRAM_TOKEN;
 const myChatId = config.telegram.chatId;

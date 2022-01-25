@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { resolve } from 'path';
 import zlib from 'zlib';
-import config from '../../config.json'
+import config from '../../../config.json'
 import { collectDataFromStream } from '../../utils/utils';
 
 const token = process.env.DISCORD_TOKEN;
