@@ -1,5 +1,4 @@
 import { millisecondsToHours, millisecondsToMinutes, millisecondsToSeconds } from "date-fns";
-import { TInviteResponse } from "../discord/invitesTypes";
 
 /**
  * Formats difference between Date objects into nice string
