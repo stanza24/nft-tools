@@ -8,3 +8,4 @@ yarn.lock
 *.key
 # Ignore .env from being accidentally committed.
 .env
+config.json

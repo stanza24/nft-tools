@@ -1,6 +1,13 @@
 import { millisecondsToHours, millisecondsToMinutes, millisecondsToSeconds } from "date-fns";
+import { TInviteResponse } from "../discord/invitesTypes";
 
-export function getDeltaTimeFormatted(start: Date, end: Date) {
+/**
+ * Formats difference between Date objects into nice string
+ * @param start Begin Date obj
+ * @param end End Date obj
+ * @returns Nice formatted string
+ */
+export function getDeltaTimeFormatted(start: Date, end: Date): string {
   const delta = end.getTime() - start.getTime();
   const MS_IN_SEC = 1000;
   const MS_IN_MIN = MS_IN_SEC * 60;
@@ -23,7 +30,7 @@ export function formatDurationAsTime(duration: Duration): string {
   return `${h} h ${m} min ${s} secs`;
 }
 
-export function collectDataFromStream(stream): Promise<{code: string; expires_at: string}> {
+export function collectDataFromStream<T>(stream): Promise<T> {
   const chunks = [];
 
   return new Promise((res, rej) => {

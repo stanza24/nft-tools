@@ -1,0 +1,20 @@
+{
+  "discordRequest": {
+    "x-super-properties": "",
+    "x-context-properties": "",
+    "user-agent": ""
+  },
+  "invitePicker": {
+    "projects": [
+      { "name": "", "serverId": "", "channelId": "" }
+    ]
+  },
+  "telegram": {
+    "isOn": false,
+    "chatId": ""
+  },
+  "tokenParser": {
+    "inputDefaultPath": "./assets/tokens_in.txt",
+    "outputDefaultPath": "./assets/tokens_out.txt"
+  }
+}

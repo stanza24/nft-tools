@@ -1,9 +1,8 @@
-import { api as discordApi } from "./discord"
-import { TgBot } from "../telegram/notify";
+import { api as discordApi } from "../../services/discord/discord"
+import { TgBot } from "../../services/telegram/telegram";
 import { format, intervalToDuration } from 'date-fns'
-import { collectDataFromStream, formatDurationAsTime, getDeltaTimeFormatted } from "../utils/utils";
+import { formatDurationAsTime, getDeltaTimeFormatted } from "../../utils/utils";
 import { AxiosResponse } from "axios";
-import zlib from 'zlib';
 
 const TIMEOUT = 2000;
 
@@ -26,7 +25,7 @@ export async function checkForInviteLink({ name, serverId, channelId }) {
       const timeEnd = new Date();
       const delta = getDeltaTimeFormatted(timeStart, timeEnd)
 
-      const {code, expires_at} = await collectDataFromStream(response.data);
+      const { code, expires_at } = await response.data
       const invite = `https://discord.gg/${code}`, expires = format(new Date(expires_at), 'dd.MM.yy HH:mm:ss');
 
       if (USE_TG_NOTIFICATION) notify(name, invite, expires, delta);

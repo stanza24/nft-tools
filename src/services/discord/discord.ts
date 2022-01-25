@@ -1,12 +1,16 @@
 import axios from 'axios';
+import { resolve } from 'path';
 import zlib from 'zlib';
-
-const API_URL = "https://discord.com"
+import config from '../../config.json'
+import { collectDataFromStream } from '../../utils/utils';
 
 const token = process.env.DISCORD_TOKEN;
-const userAgent = process.env.USER_AGENT;
-const contextProperties = process.env.CONTEXT_PROPERTIES;
-const superProperties = process.env.SUPER_PROPERTIES;
+
+const userAgent = config.discordRequest['user-agent'];
+const contextProperties = config.discordRequest['x-context-properties'];
+const superProperties = config.discordRequest['x-super-properties'];
+
+const API_URL = "https://discord.com"
 
 export const api = axios.create({
   baseURL: API_URL,
@@ -29,8 +33,15 @@ export const api = axios.create({
   decompress: false,
   responseType: 'stream',
   transformResponse(data) {
-    // Заставляем axios прогонять данные через декомпресс стримом
-    return data.pipe(zlib.createBrotliDecompress())
+    return new Promise(async (resolve) => {
+      if (data.statusCode === 200) {
+        // Заставляем axios прогонять данные через декомпресс стримом
+        const stream = data.pipe(zlib.createBrotliDecompress())
+        resolve(await collectDataFromStream<any>(stream))
+      } else {
+        resolve(data)
+      }
+    })
   }
 })
 

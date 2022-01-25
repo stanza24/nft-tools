@@ -1,41 +1,39 @@
-
-
-// type TInviteResponse = {
-//   "code": string,
-//   "type": number,
-//   "expires_at": Date,
-//   "guild": {
-//     "id": string,
-//     "name": string,
-//     "splash": null,
-//     "banner": null,
-//     "description": null,
-//     "icon": string,
-//     "features": any[],
-//     "verification_level": number,
-//     "vanity_url_code": null,
-//     "welcome_screen": any,
-//     "nsfw": boolean,
-//     "nsfw_level": number
-//   },
-//   "channel": {
-//     "id": string,
-//     "name": "📑-rules-presentation",
-//     "type": number
-//   },
-//   "inviter": {
-//     "id": string,
-//     "username": string,
-//     "avatar": string,
-//     "discriminator": string,
-//     "public_flags": number
-//   },
-//   "uses": number,
-//   "max_uses": number,
-//   "max_age": number,
-//   "temporary": boolean,
-//   "created_at": Date,
-// }
+export type TInviteResponse = {
+    "code": string,
+    "type": number,
+    "expires_at": Date,
+    "guild": {
+        "id": string,
+        "name": string,
+        "splash": null,
+        "banner": null,
+        "description": null,
+        "icon": string,
+        "features": any[],
+        "verification_level": number,
+        "vanity_url_code": null,
+        "welcome_screen": any,
+        "nsfw": boolean,
+        "nsfw_level": number
+    },
+    "channel": {
+        "id": string,
+        "name": "📑-rules-presentation",
+        "type": number
+    },
+    "inviter": {
+        "id": string,
+        "username": string,
+        "avatar": string,
+        "discriminator": string,
+        "public_flags": number
+    },
+    "uses": number,
+    "max_uses": number,
+    "max_age": number,
+    "temporary": boolean,
+    "created_at": Date,
+}
 
 /*
   {
