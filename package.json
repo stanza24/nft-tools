@@ -7,7 +7,7 @@
     "start": "node dist/index.js",
     "start:local": "yarn build && node dist/index.js",
     "start:watch": "nodemon",
-    "dev": "yarn && ts-node-dev --watch --respawn --transpile-only ./src/index.ts",
+    "dev": "npm i && ts-node-dev --watch --respawn --transpile-only ./src/index.ts",
     "build": "tsc",
     "test": "jest -c ./jest.unit.json",
     "test:coverage": "jest --coverage -c ./jest.unit.json"
